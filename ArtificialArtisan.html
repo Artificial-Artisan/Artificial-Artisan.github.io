@@ -4,15 +4,35 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1" />
    <title>Artificial Artisan</title>
-   <link rel="stylesheet" type="text/css" href="artisanstyle.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+
+   <link rel="stylesheet" type="text/css" href="Cascade Styles/artisanstyle.css">
+
+   <link rel="stylesheet" type="text/css" href="cursor/cursorstyle.css">
    <script src="cursor/cursortrail.js"></script>
+
+   <script src="NavMenu/navmenu.js"></script>
+   <link rel="stylesheet" type="text/css" href="NavMenu/navstyle.css">
 </head>
 <body>
 
     <div id="cursor-trail"></div>
     <div class="stars"></div>
     <div class="twinkling"></div>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle"> <!-- Checkbox for toggling menu -->
+    <label for="menu-toggle" class="menu-toggle-label">&#9776;</label> <!-- Label for menu toggle -->
+
+    <div class="overlay"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
 
     <main>
         <!-- Add your main content here -->
@@ -26,8 +46,18 @@
                 </a>
             </div>
             
-            <p><a href="https://discord.com/api/oauth2/authorize?client_id=1196894415487250664&permissions=2147871744&scope=bot">Add To Your Server</a></p>
+            <p><a href="https://discord.com/api/oauth2/authorize?client_id=1196894415487250664&permissions=2147871744&scope=bot">Add Me To Your Server</a></p>
+            <p class="main-description">Meet our AI-driven bot, a digital artisan capable of conjuring mesmerizing images with the stroke of a virtual brush. Powered by cutting-edge artificial intelligence algorithms, this ingenious creation seamlessly blends technology and artistry to craft captivating visuals that transcend imagination.
+
+                With an innovative approach to image generation, our bot transforms pixels into masterpieces, effortlessly navigating the vast realm of creativity. From surreal landscapes to abstract compositions, each creation is a testament to the limitless potential of AI-driven design.
+                
+                Step into a world where pixels dance to the rhythm of intelligence, and let our bot guide you through a journey of discovery and wonder. Whether you seek inspiration, innovation, or simply a glimpse into the future of digital art, our AI bot is poised to redefine the boundaries of imagination.
+                
+            </p>
+
         </section>
+
+        
     </main>
     
 

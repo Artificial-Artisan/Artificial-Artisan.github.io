@@ -1,0 +1,68 @@
+.menu-toggle {
+    display: none; /* Hide checkbox by default */
+}
+
+.menu-toggle-label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 50; /* Ensure it's above other content */
+    cursor: pointer;
+    color: #fff;
+    font-size: 24px;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: -200px; /* Move nav off screen */
+    width: 200px; /* Adjust width as needed */
+    height: 100%; /* Full height */
+    background-color: #333; /* Background color */
+    padding-top: 50px; /* Space for top navigation */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Drop shadow effect */
+    transition: left 0.3s; /* Smooth transition */
+    z-index: 40; /* Ensure it's above other content */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    text-align: center;
+    height: 60px; /* Adjust height as needed */
+    line-height: 60px; /* Center the text vertically */
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555; /* Hover background color */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: none; /* Initially hidden */
+    z-index: 30; /* Ensure it's above other content */
+}
+
+.menu-toggle:checked + .overlay {
+    display: block; /* Show overlay when menu-toggle is checked */
+}
+
+.menu-toggle:checked + nav {
+    left: 0; /* Move nav back into view */
+}
