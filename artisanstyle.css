@@ -5,14 +5,63 @@ body {
     margin: 0;
     background-color: #111; /* slight dark background */
     overflow: hidden; /* hides overflow content */
+    cursor: url('cursor/brush.png'), auto;
+    z-index: 1;
 }
 
 main {
     flex: 1;
+    z-index: 10;
+}
+
+.cursor-trail {
+    position: relative;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Prevent the cursor trail from blocking mouse events */
+    z-index: 5; 
+}
+
+/* Individual cursor dot styles */
+.cursor-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: changeShape 1s linear infinite alternate; /* Define animation */
+    background-color: #1e005a; /* Set initial dot color */
+}
+
+@keyframes changeShape {
+    0% {
+        border-radius: 50%; /* Initial shape (circle) */
+        background-color: #1e005a; /* Color 1 (red) */
+    }
+    25% {
+        border-radius: 50%; /* Shape remains circle */
+        background-color: #2b0080; /* Color 2 (yellow) */
+    }
+    50% {
+        border-radius: 50%; /* Shape remains circle */
+        background-color: #800060; /* Color 3 (green) */
+    }
+    75% {
+        border-radius: 0%; /* Shape becomes square */
+        background-color: #3c005a; /* Color 4 (blue) */
+    }
+    100% {
+        border-radius: 50%; /* Final shape (circle) */
+        background-color: #800080; /* Final color (magenta) */
+    }
 }
 
 .bot-section {
     text-align: center; /* Center-align content within the bot section */
+}
+
+.bot-section h3 {
+    margin-top: 30px; /* Add some space between the bot image and the link */
+    color: #fff; /* Set the text color to white */
+    font-weight: bold; /* Add emphasis to the text */
 }
 
 @keyframes border-color-change {
@@ -58,16 +107,16 @@ main {
 }
 
 footer {
+    cursor: auto;
+    z-index: 10;
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 20px;
 }
 
 .legal {
     list-style: none;
     padding: 0;
-    margin-top: 10px; /* Adjust margin to separate from social media icons */
 }
 
 .legal li {
