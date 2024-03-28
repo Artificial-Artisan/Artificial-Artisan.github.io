@@ -18,11 +18,11 @@ nav {
     left: -200px; /* Move nav off screen */
     width: 200px; /* Adjust width as needed */
     height: 100%; /* Full height */
-    background-color: #333; /* Background color */
     padding-top: 50px; /* Space for top navigation */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Drop shadow effect */
-    transition: left 0.3s; /* Smooth transition */
+    transition: left 0.8s; /* Smooth transition */
     z-index: 40; /* Ensure it's above other content */
+    background-color: rgb(31, 36, 87, 0.5);
 }
 
 nav ul {
@@ -32,10 +32,12 @@ nav ul {
 }
 
 nav ul li {
-    text-align: center;
     height: 60px; /* Adjust height as needed */
     line-height: 60px; /* Center the text vertically */
+    text-align: center;
+    position: relative;
 }
+
 
 nav ul li a {
     display: block;
@@ -44,8 +46,9 @@ nav ul li a {
     transition: background-color 0.3s;
 }
 
-nav ul li a:hover {
-    background-color: #555; /* Hover background color */
+nav ul li:hover {
+    background-color: #4b12122f;
+    transform: scale(1.05);
 }
 
 .overlay {

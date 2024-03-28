@@ -24,6 +24,7 @@ main {
     color: white; /* Set text color to white */
     margin: 0 auto; /* Center the text block horizontally */
     max-width: 70%; /* Set maximum width to prevent it from taking full width */
+    padding-bottom: 5%;
 }
 
 
@@ -37,8 +38,6 @@ main {
     font-weight: bold; /* Add emphasis to the text */
 }
 
-
-
 .bot-container {
     position: relative;
     width: 200px; /* Adjust width as needed */
@@ -48,6 +47,15 @@ main {
     margin: 50px auto 0; /* Center the container horizontally */
     border: 2px solid rgb(255, 255, 255); /* Initial border color */
     animation: border-color-change 5s linear infinite; /* Animation for border color change */
+}
+
+@keyframes border-color-change {
+    0% { border-color: red; }
+    20% { border-color: orange; }
+    40% { border-color: yellow; }
+    60% { border-color: green; }
+    80% { border-color: blue; }
+    100% { border-color: indigo; }
 }
 
 .bot-image {
