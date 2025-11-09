@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <title>Artificial Artisan</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Artificial Artisan</title>
 
-   <link rel="stylesheet" type="text/css" href="../Cascade Styles/cryptostyle.css">
+    <link rel="stylesheet" type="text/css" href="../Cascade Styles/cryptostyle.css">
 
-   <link rel="stylesheet" type="text/css" href="../cursor/cursorstyle.css">
-   <script src="../cursor/cursortrail.js"></script>
+    <link rel="stylesheet" type="text/css" href="../cursor/cursorstyle.css">
+    <script src="../cursor/cursortrail.js"></script>
 
-   <script src="../NavMenu/navmenu.js"></script>
-   <link rel="stylesheet" type="text/css" href="../NavMenu/navstyle.css">
+    <script src="../NavMenu/navmenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="../NavMenu/navstyle.css">
 </head>
+
 <body>
 
     <div id="cursor-trail"></div>
@@ -37,8 +39,10 @@
 
     <main>
         <div class="title">Payments Page</div>
-        <div class="text-content">You can make purchase of any amount and send us an <a href="../Contact.html">Email</a> with your desired amount of Diamonds, Tokens or Subscription.
-        Servicing within 1-5 days. Please include your Discord Name or ID, and the amount of resources you want. You may request multiple resources with one purchase.</div>
+        <div class="text-content">You can make purchase of any amount and send us an <a href="../Contact.html">Email</a>
+            with your desired amount of Diamonds, Tokens or Subscription.
+            Servicing within 1-5 days. Please include your Discord Name or ID, and the amount of resources you want. You
+            may request multiple resources with one purchase.</div>
 
         <div>Also if you want to fund a new GPU for our bot send any amount and Email us!</div>
 
@@ -73,27 +77,33 @@
         </div>
 
         <div class="flex-container">
-            <p class="main-description">
-                <span class="icon-text">
-                    <img src="bitcoin.png" alt="Bitcoin Icon" class="crypto-icon"/> Bitcoin: bc1qtl2avay2hj9hkacy0f4gq9cgf4kazasadt6ur2 
-                </span>
-                <br/>
-                <br/>
-                <span class="icon-text">
-                    <img src="etherium.png" alt="Etherium Icon" class="crypto-icon"/> Etherium: 0xbe5E8659Db6bF86F8FB9Cbfa3741d95FE434e829
-                </span>
-            </p>
-        </div>
-        
+            <div class="main-description">
+                <div class="address-container">
+                    <img src="bitcoin.png" alt="Bitcoin Icon" class="crypto-icon" onerror="this.style.display='none'" />
+                    <strong>Bitcoin:</strong>
+                    <span class="address-text" id="btc-address">bc1qtl2avay2hj9hkacy0f4gq9cgf4kazasadt6ur2</span>
+                    <div class="copy-btn" onclick="copyToClipboard('btc-address', this)">Copy</div>
+                </div>
 
-        
+                <div class="address-container">
+                    <img src="etherium.png" alt="Ethereum Icon" class="crypto-icon"
+                        onerror="this.style.display='none'" />
+                    <strong>Ethereum:</strong>
+                    <span class="address-text" id="eth-address">0xbe5E8659Db6bF86F8FB9Cbfa3741d95FE434e829</span>
+                    <div class="copy-btn" onclick="copyToClipboard('eth-address', this)">Copy</div>
+                </div>
+            </div>
+        </div>
+
+
+
     </main>
-    
+
 
     <footer>
         <!-- Add your footer content here -->
         <p>&copy; 2024 Artificial Artisan. All rights reserved.</p>
-        
+
         <!-- Legal Information -->
         <ul class="legal">
             <li><a href="../PrivacyPolicy.html">Privacy Policy</a></li>
@@ -101,5 +111,50 @@
         </ul>
     </footer>
 
+    <script>
+        async function copyToClipboard(elementId, button) {
+            const text = document.getElementById(elementId).textContent;
+
+            try {
+                // Modern Clipboard API (works on most browsers)
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    // Fallback for older browsers and non-HTTPS contexts
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+
+                    try {
+                        document.execCommand('copy');
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        alert('Copy failed. Please copy manually.');
+                        return;
+                    } finally {
+                        document.body.removeChild(textArea);
+                    }
+                }
+
+                // Visual feedback
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+
+            } catch (err) {
+                console.error('Copy failed:', err);
+                alert('Failed to copy. Please copy manually.');
+            }
+        }
+    </script>
 </body>
+
 </html>
