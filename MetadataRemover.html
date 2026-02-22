@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Metadata Remover</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0f0f13;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #e0e0e0;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+    }
+
+    #drop-zone {
+      position: relative;
+      width: min(520px, 100%);
+      min-height: 260px;
+      border: 2px dashed #3a3a50;
+      border-radius: 18px;
+      background: #16161f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      padding: 2rem;
+    }
+
+    #btn-back {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      padding: 0.45rem 1rem;
+      border: 1px solid #3a3a50;
+      border-radius: 8px;
+      background: transparent;
+      color: #9a9ab0;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    #btn-back:hover { border-color: #7c6fff; color: #7c6fff; }
+
+    #drop-zone.drag-over {
+      border-color: #7c6fff;
+      background: #1c1c2e;
+    }
+
+    #drop-zone svg {
+      width: 52px;
+      height: 52px;
+      color: #4a4a6a;
+      transition: color 0.2s;
+    }
+
+    #drop-zone.drag-over svg { color: #7c6fff; }
+
+    #drop-zone p {
+      font-size: 0.95rem;
+      color: #7a7a9a;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    #drop-zone p span {
+      color: #7c6fff;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #file-input { display: none; }
+
+    #btn-browse {
+      margin-top: 0.5rem;
+      padding: 0.55rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      background: #7c6fff;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    #btn-browse:hover { background: #6a5de8; }
+    #btn-browse:active { transform: scale(0.97); }
+
+    /* Preview area */
+    #preview-section {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      width: min(520px, 100%);
+      margin-top: 2rem;
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #preview-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 14px;
+      border: 1px solid #2a2a3a;
+      background: #111118;
+    }
+
+    #file-info {
+      font-size: 0.82rem;
+      color: #5a5a7a;
+      text-align: center;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #btn-reset {
+      padding: 0.45rem 1.1rem;
+      border: 1px solid #3a3a50;
+      border-radius: 8px;
+      background: transparent;
+      color: #9a9ab0;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    #btn-reset:hover { border-color: #7c6fff; color: #7c6fff; }
+
+    #btn-strip {
+      padding: 0.45rem 1.1rem;
+      border: none;
+      border-radius: 8px;
+      background: #7c6fff;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    #btn-strip:hover { background: #6a5de8; }
+    #btn-strip:active { transform: scale(0.97); }
+
+    #strip-status {
+      font-size: 0.8rem;
+      color: #5cb85c;
+      min-height: 1.1em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="btn-back" onclick="history.back()">&#8592; Back</button>
+  
+  <h1>Image Metadata Remover</h1>
+
+  <div id="drop-zone">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+    </svg>
+    <p>Drag & drop an image here<br>or <span id="browse-trigger">browse your files</span></p>
+    <button id="btn-browse">Open File Explorer</button>
+    <input type="file" id="file-input" accept="image/*" />
+  </div>
+
+  <div id="preview-section">
+    <img id="preview-img" src="" alt="Preview" />
+    <p id="file-info"></p>
+    <p id="strip-status"></p>
+    <div class="btn-row">
+      <button id="btn-strip">🧹 Remove Metadata &amp; Download</button>
+      <button id="btn-reset">✕ Clear image</button>
+    </div>
+  </div>
+
+  <script>
+    const dropZone      = document.getElementById('drop-zone');
+    const fileInput     = document.getElementById('file-input');
+    const btnBrowse     = document.getElementById('btn-browse');
+    const browseTrigger = document.getElementById('browse-trigger');
+    const previewSec    = document.getElementById('preview-section');
+    const previewImg    = document.getElementById('preview-img');
+    const fileInfo      = document.getElementById('file-info');
+    const btnReset      = document.getElementById('btn-reset');
+    const btnStrip      = document.getElementById('btn-strip');
+    const stripStatus   = document.getElementById('strip-status');
+
+    // Open file dialog
+    btnBrowse.addEventListener('click',     () => fileInput.click());
+    browseTrigger.addEventListener('click', () => fileInput.click());
+
+    // File selected via dialog
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) showPreview(fileInput.files[0]);
+    });
+
+    // Drag & drop
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    ['dragleave', 'dragend'].forEach(evt =>
+      dropZone.addEventListener(evt, () => dropZone.classList.remove('drag-over'))
+    );
+
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        showPreview(file);
+      }
+    });
+
+    // Reset
+    btnReset.addEventListener('click', () => {
+      previewSec.style.display = 'none';
+      dropZone.style.display   = 'flex';
+      previewImg.src = '';
+      fileInput.value = '';
+      stripStatus.textContent = '';
+    });
+
+    // Strip metadata by redrawing through a canvas and downloading
+    btnStrip.addEventListener('click', () => {
+      const img = previewImg;
+      const canvas = document.createElement('canvas');
+      canvas.width  = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+
+      // Use PNG to guarantee no EXIF survives; preserve name but swap extension
+      const origName   = (fileInput.files[0]?.name || 'image').replace(/\.[^.]+$/, '');
+      const outputName = origName + '_clean.png';
+
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a   = document.createElement('a');
+        a.href     = url;
+        a.download = outputName;
+        a.click();
+        URL.revokeObjectURL(url);
+        stripStatus.textContent = '✓ Metadata removed — file downloaded!';
+      }, 'image/png');
+    });
+
+    function showPreview(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImg.src = e.target.result;
+        const size = file.size < 1024 * 1024
+          ? (file.size / 1024).toFixed(1) + ' KB'
+          : (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+        fileInfo.textContent = `${file.name}  ·  ${size}`;
+        stripStatus.textContent = '';
+        dropZone.style.display   = 'none';
+        previewSec.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

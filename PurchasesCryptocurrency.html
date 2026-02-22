@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Artificial Artisan</title>
 
-    <link rel="stylesheet" type="text/css" href="../Cascade Styles/cryptostyle.css">
+    <link rel="stylesheet" type="text/css" href="Cascade Styles/cryptostyle.css">
+    <link rel="stylesheet" type="text/css" href="Cascade Styles/footerstyle.css">
 
-    <link rel="stylesheet" type="text/css" href="../cursor/cursorstyle.css">
-    <script src="../cursor/cursortrail.js"></script>
+    <link rel="stylesheet" type="text/css" href="cursor/cursorstyle.css">
+    <script src="cursor/cursortrail.js"></script>
 
-    <script src="../NavMenu/navmenu.js"></script>
-    <link rel="stylesheet" type="text/css" href="../NavMenu/navstyle.css">
+    <script src="NavMenu/navmenu.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="NavMenu/navstyle.css">
+    
+    <script src="FooterMenu/footermenu.js" defer></script>
 </head>
 
 <body>
@@ -21,21 +24,12 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
 
-    <input type="checkbox" id="menu-toggle" class="menu-toggle"> <!-- Checkbox for toggling menu -->
-    <label for="menu-toggle" class="menu-toggle-label">&#9776;</label> <!-- Label for menu toggle -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-toggle-label">&#9776;</label>
 
     <div class="overlay"></div>
 
-    <nav>
-        <ul>
-            <li><a href="../ArtificialArtisan.html">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="../Services.html">Services</a></li>
-            <li><a href="../Contact.html">Contact</a></li>
-            <li><a href="PurchasesCryptocurrency.html">Crypto Payments</a></li>
-        </ul>
-    </nav>
-
+    <site-menu></site-menu>
 
     <main>
         <div class="title">Payments Page</div>
@@ -77,14 +71,14 @@
         <div class="flex-container">
             <div class="main-description">
                 <div class="address-container">
-                    <img src="bitcoin.png" alt="Bitcoin Icon" class="crypto-icon" onerror="this.style.display='none'" />
+                    <img src="Payments/bitcoin.png" alt="Bitcoin Icon" class="crypto-icon" onerror="this.style.display='none'" />
                     <strong>Bitcoin:</strong>
                     <span class="address-text" id="btc-address">bc1qtl2avay2hj9hkacy0f4gq9cgf4kazasadt6ur2</span>
                     <div class="copy-btn" onclick="copyToClipboard('btc-address', this)">Copy</div>
                 </div>
 
                 <div class="address-container">
-                    <img src="etherium.png" alt="Ethereum Icon" class="crypto-icon"
+                    <img src="Payments/etherium.png" alt="Ethereum Icon" class="crypto-icon"
                         onerror="this.style.display='none'" />
                     <strong>Ethereum:</strong>
                     <span class="address-text" id="eth-address">0xbe5E8659Db6bF86F8FB9Cbfa3741d95FE434e829</span>
@@ -93,21 +87,9 @@
             </div>
         </div>
 
-
-
     </main>
-
-
-    <footer>
-        <!-- Add your footer content here -->
-        <p>&copy; 2024 Artificial Artisan. All rights reserved.</p>
-
-        <!-- Legal Information -->
-        <ul class="legal">
-            <li><a href="../PrivacyPolicy.html">Privacy Policy</a></li>
-            <li><a href="../TermsOfService.html">Terms of Service</a></li>
-        </ul>
-    </footer>
+    
+    <footer-menu></footer-menu>
 
     <script>
         async function copyToClipboard(elementId, button) {
@@ -153,6 +135,7 @@
             }
         }
     </script>
+    
 </body>
 
 </html>

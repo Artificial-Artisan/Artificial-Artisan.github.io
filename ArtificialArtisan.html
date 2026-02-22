@@ -6,11 +6,13 @@
    <title>Artificial Artisan</title>
 
    <link rel="stylesheet" type="text/css" href="Cascade Styles/artisanstyle.css">
+   <link rel="stylesheet" type="text/css" href="Cascade Styles/footerstyle.css">
 
    <link rel="stylesheet" type="text/css" href="cursor/cursorstyle.css">
    <script src="cursor/cursortrail.js"></script>
 
-   <script src="NavMenu/navmenu.js"></script>
+   <script src="NavMenu/navmenu.js" defer></script>
+   <script src="FooterMenu/footermenu.js" defer></script>
    <link rel="stylesheet" type="text/css" href="NavMenu/navstyle.css">
 </head>
 <body>
@@ -19,21 +21,12 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
 
-    <input type="checkbox" id="menu-toggle" class="menu-toggle"> <!-- Checkbox for toggling menu -->
-    <label for="menu-toggle" class="menu-toggle-label">&#9776;</label> <!-- Label for menu toggle -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-toggle-label">&#9776;</label>
 
     <div class="overlay"></div>
 
-    <nav>
-        <ul>
-            <li><a href="ArtificialArtisan.html">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="Services.html">Services</a></li>
-            <li><a href="Contact.html">Contact</a></li>
-            <li><a href="Payments/PurchasesCryptocurrency.html">Crypto Payments</a></li>
-        </ul>
-    </nav>
-
+    <site-menu></site-menu>
 
     <main>
         <section class="bot-section">
@@ -62,17 +55,7 @@
         
     </main>
     
-
-    <footer>
-        <!-- Add your footer content here -->
-        <p>&copy; 2024 Artificial Artisan. All rights reserved.</p>
-        
-        <!-- Legal Information -->
-        <ul class="legal">
-            <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-            <li><a href="TermsOfService.html">Terms of Service</a></li>
-        </ul>
-    </footer>
+    <footer-menu></footer-menu>
 
 </body>
 </html>

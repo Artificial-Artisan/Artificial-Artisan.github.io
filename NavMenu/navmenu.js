@@ -19,3 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
         nav.style.left = '-200px'; // Move nav off screen
     });
 });
+
+class SiteMenu extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <nav>
+          <ul>
+            <li><a href="ArtificialArtisan.html">Home</a></li>
+            <li><a href="Services.html">Services</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="PurchasesCryptocurrency.html">Crypto Payments</a></li>
+          </ul>
+      </nav>
+    `;
+  }
+}
+
+customElements.define("site-menu", SiteMenu);
