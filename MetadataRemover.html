@@ -255,27 +255,35 @@
       stripStatus.textContent = '';
     });
 
-    // Strip metadata by redrawing through a canvas and downloading
     btnStrip.addEventListener('click', () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+
       const img = previewImg;
       const canvas = document.createElement('canvas');
       canvas.width  = img.naturalWidth;
       canvas.height = img.naturalHeight;
       canvas.getContext('2d').drawImage(img, 0, 0);
 
-      // Use PNG to guarantee no EXIF survives; preserve name but swap extension
-      const origName   = (fileInput.files[0]?.name || 'image').replace(/\.[^.]+$/, '');
-      const outputName = origName + '_clean.png';
+      const originalType = file.type || 'image/png';
+      const originalName = file.name.replace(/\.[^.]+$/, '');
+      const extension    = originalType.split('/')[1] || 'png';
+
+      let quality;
+      
+      if (originalType === 'image/jpeg' || originalType === 'image/jpg') {
+        quality = 0.92;
+      }
 
       canvas.toBlob(blob => {
         const url = URL.createObjectURL(blob);
-        const a   = document.createElement('a');
-        a.href     = url;
-        a.download = outputName;
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${originalName}_clean.${extension}`;
         a.click();
         URL.revokeObjectURL(url);
-        stripStatus.textContent = '✓ Metadata removed — file downloaded!';
-      }, 'image/png');
+        stripStatus.textContent = '✓ Metadata removed — optimized download ready!';
+      }, originalType, quality);
     });
 
     function showPreview(file) {
