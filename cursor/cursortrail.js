@@ -6,10 +6,8 @@ document.addEventListener('mousemove', function(e) {
     var dot = document.createElement('div');
     dot.classList.add('cursor-dot');
 
-    // Random sparkle icon
     dot.dataset.sparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
 
-    // Alternating color set as a CSS variable
     const color = colors[colorIndex % colors.length];
     dot.style.setProperty('--sparkle-color', color);
     colorIndex++;
@@ -20,14 +18,5 @@ document.addEventListener('mousemove', function(e) {
     dot.style.left = e.pageX + 'px';
     dot.style.top = e.pageY + 'px';
 
-    // Append to the cursor trail container
     document.getElementById('cursor-trail').appendChild(dot);
-
-    // Remove dot after a short delay
-    setTimeout(function() {
-        dot.style.opacity = '0';
-        setTimeout(function() {
-            dot.remove();
-        }, 1000);
-    }, 500);
 });

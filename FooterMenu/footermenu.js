@@ -3,7 +3,7 @@ class FooterMenu extends HTMLElement {
     this.innerHTML = `
       <footer>
         <!-- Add your footer content here -->
-        <p>&copy; 2024 Artificial Artisan. All rights reserved.</p>
+        <p>&copy; 2026 Artificial Artisan. All rights reserved.</p>
         
         <!-- Legal Information -->
         <ul class="legal">
