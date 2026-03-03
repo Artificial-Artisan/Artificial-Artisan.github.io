@@ -202,6 +202,15 @@ main {
 		-webkit-animation:move-twink-back 200s linear infinite;
 		animation:move-twink-back 200s linear infinite;
 	}
+}
 
-    
+.price-note {
+    font-size: 0.75em;
+    color: #888;
+}
+
+.pricing-disclaimer {
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #888888;
 }
